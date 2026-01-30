@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roderick Rabelo | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #06b6d4;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.95);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+            font-weight: 400;
+            margin-bottom: 32px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 32px;
+            background: linear-gradient(180deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--light);
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25);
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .project-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .language-badge {
+            padding: 6px 14px;
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #06b6d4;
+        }
+
+        .project-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .project-description {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            min-height: 48px;
+        }
+
+        .project-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-stars {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #fbbf24;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-link {
+            color: #8b5cf6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin-bottom: 12px;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+        .delay-8 { animation-delay: 0.8s; }
+        .delay-9 { animation-delay: 0.9s; }
+        .delay-10 { animation-delay: 1.0s; }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .orb {
+                opacity: 0.3;
+            }
+
+            .orb-1 {
+                width: 400px;
+                height: 400px;
+            }
+
+            .orb-2 {
+                width: 350px;
+                height: 350px;
+            }
+
+            .orb-3 {
+                width: 300px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-effects">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="container">
+        <header class="fade-in">
+            <h1>Roderick Rabelo</h1>
+            <p class="subtitle">Datacenter Production Platform Engineer • Building the future, one commit at a time</p>
+            <div class="social-links">
+                <a href="https://github.com/rodypr06" target="_blank" class="social-link">
+                    <span>🐙</span> GitHub
+                </a>
+                <a href="https://rodyytech.net" target="_blank" class="social-link">
+                    <span>🌐</span> Website
+                </a>
+                <a href="https://linkedin.com/in/roderick-rabelo" target="_blank" class="social-link">
+                    <span>💼</span> LinkedIn
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <h2 class="section-title fade-in delay-1">Featured Projects</h2>
+            <div class="projects-grid" id="projects-container">
+                <!-- Projects will be loaded here -->
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with ❤️ by Roderick</p>
+            <p>© 2026 All rights reserved</p>
+        </footer>
+    </div>
+
+    <script>
+        const projects = [
+            {
+                name: "AURA",
+                description: "Mental Health Support App",
+                url: "https://github.com/rodypr06/AURA---Energy-Mind",
+                language: "TypeScript",
+                stars: 0,
+                icon: "🧠"
+            },
+            {
+                name: "AI Watcher",
+                description: "Aggregator of AI news and trending topics",
+                url: "https://github.com/rodypr06/ai-watcher",
+                language: "Python",
+                stars: 0,
+                icon: "🤖"
+            },
+            {
+                name: "Sentinel Central Log Server",
+                description: "App to analyse logs from multiple devices",
+                url: "https://github.com/rodypr06/Sentinel-Central-Log-Server",
+                language: "TypeScript",
+                stars: 0,
+                icon: "📊"
+            },
+            {
+                name: "PRISM Project Tracker",
+                description: "Tool to track client project progress",
+                url: "https://github.com/rodypr06/PRISM-Project-Tracker",
+                language: "JavaScript",
+                stars: 0,
+                icon: "📈"
+            },
+            {
+                name: "Mindflow",
+                description: "Task organizer app with AI integration",
+                url: "https://github.com/rodypr06/mindflow",
+                language: "TypeScript",
+                stars: 0,
+                icon: "💭"
+            },
+            {
+                name: "Weather App",
+                description: "Fun Weather App with beautiful UI",
+                url: "https://github.com/rodypr06/weather-app",
+                language: "JavaScript",
+                stars: 0,
+                icon: "🌤️"
+            },
+            {
+                name: "Report Hub",
+                description: "A hub for reports and analytics",
+                url: "https://github.com/rodypr06/Report-Hub",
+                language: "JavaScript",
+                stars: 0,
+                icon: "📋"
+            },
+            {
+                name: "Snake Game",
+                description: "Classic snake game built for RodyTech",
+                url: "https://github.com/rodypr06/snake-game-rodytech",
+                language: "HTML",
+                stars: 0,
+                icon: "🐍"
+            },
+            {
+                name: "Personal Finance Dashboard",
+                description: "Widget-based finance tracking dashboard",
+                url: "https://github.com/rodypr06/personal-finance-widget-dash",
+                language: "Python",
+                stars: 0,
+                icon: "💰"
+            },
+            {
+                name: "RodyBot LLM WebUI",
+                description: "Web interface for AI assistant interaction",
+                url: "https://github.com/rodypr06/rodybot-llm-webui",
+                language: "JavaScript",
+                stars: 0,
+                icon: "🤖"
+            },
+            {
+                name: "Agentic",
+                description: "Multi-agent system for autonomous task execution",
+                url: "https://github.com/rodypr06/agentic",
+                language: "Python",
+                stars: 0,
+                icon: "🔬"
+            },
+            {
+                name: "Weekly Planner",
+                description: "Smart planning tool for weekly schedules",
+                url: "https://github.com/rodypr06/weekly-planner",
+                language: "JavaScript",
+                stars: 0,
+                icon: "📅"
+            }
+        ];
+
+        function renderProjects() {
+            const container = document.getElementById('projects-container');
+            
+            projects.forEach((project, index) => {
+                const delay = (index % 10) + 1;
+                const card = document.createElement('a');
+                card.className = `project-card fade-in delay-${delay}`;
+                card.href = project.url;
+                card.target = '_blank';
+                
+                card.innerHTML = `
+                    <div class="project-header">
+                        <div class="project-icon">${project.icon}</div>
+                        <span class="language-badge">${project.language}</span>
+                    </div>
+                    <h3 class="project-title">${project.name}</h3>
+                    <p class="project-description">${project.description}</p>
+                    <div class="project-footer">
+                        <span class="project-stars">
+                            ${project.stars > 0 ? `⭐ ${project.stars}` : '☆ 0'}
+                        </span>
+                        <span class="project-link">
+                            View Project →
+                        </span>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', renderProjects);
+    </script>
+</body>
+</html>
